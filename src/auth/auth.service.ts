@@ -4,8 +4,8 @@ import { User } from '../user/entity/user.entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { CreateUserDto } from '../user/dto/user.dto';
 import * as process from 'process';
+import { Payload } from '../_common/interfaces/payload.interface';
 
 @Injectable()
 export class AuthService {
@@ -36,5 +36,8 @@ export class AuthService {
         secret: process.env.ACCESS_SECRET_KEY,
       }),
     };
+  }
+  async tokenValidateUser(payload: Payload): Promise<User | undefined> {
+    return await this.userRepository.findOne({ where: { id: payload.id } });
   }
 }
