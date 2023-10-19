@@ -11,7 +11,7 @@ export class AuthController {
   @Post('/login')
   async login(@Body() data: LoginDto, @Res() res: Response): Promise<Response> {
     const result = await this.authService.login(data.email, data.password);
-    res.cookie('access_token', result.accessToken, { httpOnly: true });
+    res.cookie('access_token', result.accessToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
     res.header('Authorization', 'Bearer ' + result.accessToken);
     return res.status(200).json(true);
   }
