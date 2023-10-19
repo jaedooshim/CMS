@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ormConfig } from './_common/typeorm.config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
     TypeOrmModule.forRootAsync({ useFactory: ormConfig }),
     UserModule,
     AuthModule,
+    JwtModule,
   ],
   controllers: [],
   providers: [],
