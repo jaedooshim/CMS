@@ -1,10 +1,13 @@
-import { ExecutionContext, Injectable } from '@nestjs/common';
-import { AuthGuard as NestAuthGuard } from '@nestjs/passport';
-import { Observable } from 'rxjs';
+import { CanActivate, Injectable, ExecutionContext, UnauthorizedException } from '@nestjs/common';
 
 @Injectable()
-export class AuthGuard extends NestAuthGuard('jwt') {
-  canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-    return super.canActivate(context);
+export class AuthGuard implements CanActivate {
+  constructor() {}
+
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const request = context.switchToHttp().getRequest();
+    if (!request.user) throw new UnauthorizedException('로그인이 필요합니다.');
+
+    return true;
   }
 }
