@@ -26,6 +26,9 @@ export class User {
   @Column()
   subAddress: string;
 
+  @Column()
+  Roles: boolean;
+
   @CreateDateColumn()
   createAt: Date;
 
