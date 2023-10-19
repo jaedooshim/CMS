@@ -10,6 +10,7 @@ function ormConfig(): TypeOrmModuleOptions {
       migrationsDir: 'src/migrations',
     },
     MIGRATIONS_RUN: false,
+    logging: false,
   };
 
   const ormconfig: TypeOrmModuleOptions = {
