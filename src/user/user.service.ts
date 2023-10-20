@@ -24,4 +24,17 @@ export class UserService {
     await this.userRepository.save(newUser);
     return { message: '회원가입이 완료되었습니다.' };
   }
+
+  /* 모든 유저 조회 */
+  async findAll(): Promise<User[] | undefined> {
+    return await this.userRepository.find();
+  }
+
+  /* 특정 유저 조회 */
+  async findOne(id: number): Promise<User> {
+    // console.log(id);
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) throw new HttpException('사용자를 찾을 수 없습니다.', 403);
+    return user;
+  }
 }
