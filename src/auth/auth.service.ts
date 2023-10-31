@@ -14,6 +14,7 @@ export class AuthService {
     private userRepository: Repository<User>,
     private jwtService: JwtService,
   ) {}
+  /* 로그인 */
   async login(email: string, password: string): Promise<{ accessToken: string } | undefined> {
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
@@ -30,12 +31,21 @@ export class AuthService {
       subAddress: user.subAddress,
       tel: user.tel,
     };
-    return {
-      accessToken: this.jwtService.sign(payload, {
-        expiresIn: process.env.JWT_ACCESS_EXPIRATION_TIME,
-        secret: process.env.ACCESS_SECRET_KEY,
-      }),
-    };
+    console.log(payload);
+    // console.log(process.env.ACCESS_SECRET_KEY);
+    // console.log(process.env.JWT_ACCESS_EXPIRATION_TIME);
+
+    try {
+      return {
+        accessToken: this.jwtService.sign(payload, {
+          expiresIn: process.env.JWT_ACCESS_EXPIRATION_TIME,
+          secret: process.env.ACCESS_SECRET_KEY,
+        }),
+      };
+    } catch (error) {
+      console.error('Error : ', error);
+      throw error;
+    }
   }
   async tokenValidateUser(payload: Payload): Promise<User | undefined> {
     return await this.userRepository.findOne({ where: { id: payload.id } });
