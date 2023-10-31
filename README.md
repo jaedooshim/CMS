@@ -1,7 +1,6 @@
 # CMS - 콘텐츠 관리 시스템
 
 ## BackEnd - 심재두
-## FrontEnd - 인한별
 
 ## # 프로젝트 소개
 CMS (Content Management System)
@@ -10,12 +9,12 @@ CMS (Content Management System)
 
 ## Rest API
 
-| Content              | Method     | Path             |
-| -------------------- | ---------- |------------------|
-| 로그인                   | `POST`     | /auth/login      |
-| 소셜로그인-google         | `GET`      | /google/login    |
-| 소셜로그인-google redirect| `GET`      | /google/redirect |
-| 로그아웃                  | `POST`      | /auth/logout     |
-| 회원가입                  | `POST`      | /users           |
-| 회원탈퇴                  | `DELETE`      | /users           |
+| Content | Method   | Path    |
+|---------|----------|---------|
+| 로그인     | `POST`   | /auth/login |
+| 회원가입    | `POST`   | /users  |
+| 회원조회    | `GET`    | /users  |
+| 특정 회원조회 | `POST`   | /users/:id |
+| 회원수정    | `PATCH`  | /users  |
+| 회원탈퇴    | `DELETE` | /users/:id |
                       
