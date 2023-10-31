@@ -5,8 +5,6 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/user.dto';
 import { MessageInterface } from '../_common/interfaces/message.interface';
 import * as bcrypt from 'bcrypt';
-import { UpdateuserDto } from './dto/updateuser.dto';
-import { Response } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import * as process from 'process';
 import { TokenInterface } from '../_common/interfaces/token.interface';
