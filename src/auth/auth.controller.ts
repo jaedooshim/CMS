@@ -2,12 +2,13 @@ import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { Request, Response } from 'express';
-import { AuthGuard } from './guard/auth.guard';
+import { JwtAuthGuard } from './guard/auth.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  /* 로그인 */
   @Post('/login')
   async login(@Body() data: LoginDto, @Res() res: Response): Promise<Response> {
     const result = await this.authService.login(data.email, data.password);
@@ -16,7 +17,7 @@ export class AuthController {
     return res.status(200).json(true);
   }
   @Get('/authenticate')
-  @UseGuards(AuthGuard)
+  @UseGuards(JwtAuthGuard)
   isAuthenticated(@Req() req: Request): any {
     const user: any = req.user;
     return user;
